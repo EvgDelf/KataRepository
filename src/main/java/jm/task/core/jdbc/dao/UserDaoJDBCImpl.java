@@ -2,9 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
-
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +11,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
+    @Override
     public void createUsersTable() {
         String create = "CREATE TABLE users (Id INT PRIMARY KEY AUTO_INCREMENT,Name VARCHAR(30) NOT NULL ,LastName VARCHAR (30) NOT NULL," +
                 "Age INT NOT NULL)";
@@ -23,6 +22,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
+    @Override
     public void dropUsersTable() {
         String drop = "DROP TABLE IF EXISTS users";
         try(PreparedStatement statement = Util.connection().prepareStatement(drop)){
@@ -30,6 +30,7 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {}
     }
 
+    @Override
     public void saveUser(String name, String lastName, byte age) {
         String save = "INSERT INTO users (Name, LastName, Age) VALUES (?, ?, ?)";
         try(PreparedStatement statement = Util.connection().prepareStatement(save)){
@@ -43,6 +44,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void removeUserById(long id) {
         String remove = "DELETE FROM users WHERE Id = ?";
         try(PreparedStatement statement = Util.connection().prepareStatement(remove)){
@@ -53,6 +55,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public List<User> getAllUsers() {
         String all = "SELECT * FROM users";
         List<User> userList = new LinkedList<>();
@@ -72,6 +75,7 @@ public class UserDaoJDBCImpl implements UserDao {
         return userList;
     }
 
+    @Override
     public void cleanUsersTable() {
         String remove = "DELETE FROM users";
         try(Statement statement = Util.connection().createStatement()){
