@@ -10,11 +10,10 @@ public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
 
     }
-
     @Override
     public void createUsersTable() {
         String create = "CREATE TABLE users (Id INT PRIMARY KEY AUTO_INCREMENT,Name VARCHAR(30) NOT NULL ,LastName VARCHAR (30) NOT NULL," +
-                "Age INT NOT NULL)";
+                "Age TINYINT NOT NULL)";
         try(PreparedStatement statement = Util.connection().prepareStatement(create)){
            statement.execute();
         } catch (SQLException e) {
